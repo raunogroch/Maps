@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'NavigationController@index');
+Route::get('new', 'NavigationController@newdot');

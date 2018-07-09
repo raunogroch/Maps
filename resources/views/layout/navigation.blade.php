@@ -5,6 +5,6 @@
         </a>
     </li>
     <li>
-        <a href="representative.html"><i class="zmdi zmdi-google-maps zmdi-hc-fw"></i> Add Dots</a>
+        <a href="{{ url('new') }}"><i class="zmdi zmdi-google-maps zmdi-hc-fw"></i> Add Dots</a>
     </li>
 </ul>
