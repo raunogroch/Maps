@@ -607,5 +607,28 @@ body, html{
 
 .map{
 	width: 100%;
-	height: 100%;
+}
+
+.my-10{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.my-5{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.line_bottom{
+	border-bottom: 1px solid #d5d5d5;
+}
+.border_input{
+	border: none;
+	border-bottom: 1px solid black;
+}
+.padding_none{
+	padding: 0;
+}
+.content_info{
+	background: #d5d5d5;
+	position: relative;
+	width: 220px;
 }
