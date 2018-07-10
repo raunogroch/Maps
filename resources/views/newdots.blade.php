@@ -1,12 +1,13 @@
 @extends('layout.app')
 @section('content')
 
-    <div id="map" class="map"></div>
+    <div id="map" class="map" data-lat="" data-lng=""></div>
 
 @endsection
 @section('scripts')
     <script src="{{ url('assets/js/maps.js') }}"></script>
     <script>
+        var markers = [];
         function allMap() {
             var map = new google.maps.Map(
                 document.getElementById('map'),
@@ -32,13 +33,13 @@
                 '            <div class="row">\n' +
                 '                <div class="col-sm-12 my-10 padding_none">\n' +
                 '                    <span class="pull-left">Name :</span>\n' +
-                '                    <input class="border_input pull-right" id="info_dot" data-lat="" data-lng="" type="text" name="name">\n' +
+                '                    <input class="border_input pull-right" id="info_dot" type="text" name="name">\n' +
                 '                </div>\n' +
                 '            </div>\n' +
                 '            <div class="row">\n' +
                 '                <div class="col-sm-12">\n' +
-                '                    <a class="btn btn-success btn-xs" href="#">Load</a>\n' +
-                '                    <a class="btn btn-danger btn-xs" href="#">Delete</a>\n' +
+                '                    <a class="btn btn-success btn-xs" id="loaddot" href="#">Load</a>\n' +
+                '                    <a class="btn btn-danger btn-xs" id="deletedot" href="#">Delete</a>\n' +
                 '                </div>\n' +
                 '            </div>\n' +
                 '        </div>\n' +
@@ -64,10 +65,49 @@
                         fillOpacity:1
                     }
                 });
+
+                if ($('.map').data('lat')){
+                    deleteMarkers();
+                    $('#info_dot').val('');
+                }
+
+                markers.push(marker);
+
+                $('.map').data('lat', lat);
+                $('.map').data('lng', lng);
                 infowindow.open(map, marker);
             }
         }
+
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz_6QoQyLUUV8S6i2DkNbGWwa9FAsa_PU&callback=allMap">
+    </script>
+
+    <script>
+        $('#map').on('click', '#loaddot', function(){
+            var data = {
+                lat: $('.map').data('lat'),
+                lng: $('.map').data('lng'),
+                name: $('#info_dot').val()
+            }
+            console.log(data);
+        });
+        $('#map').on('click', '#deletedot', function(){
+            deleteMarkers();
+        });
     </script>
 @endsection
