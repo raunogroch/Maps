@@ -13,3 +13,4 @@
 
 Route::get('/', 'NavigationController@index');
 Route::get('new', 'NavigationController@newdot');
+Route::post('save_dot', 'AjaxController@save_dot');

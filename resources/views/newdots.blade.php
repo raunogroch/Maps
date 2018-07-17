@@ -1,11 +1,13 @@
 @extends('layout.app')
 @section('content')
 
-    <div id="map" class="map" data-lat="" data-lng=""></div>
+
+    <div id="map" class="map" data-lat="" data-lng="" data-token="{{ csrf_token() }}"></div>
 
 @endsection
 @section('scripts')
     <script src="{{ url('assets/js/maps.js') }}"></script>
+    <script src="{{ url('assets/js/ajax_functions.js') }}"></script>
     <script>
         var markers = [];
         function allMap() {
@@ -95,19 +97,5 @@
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz_6QoQyLUUV8S6i2DkNbGWwa9FAsa_PU&callback=allMap">
-    </script>
-
-    <script>
-        $('#map').on('click', '#loaddot', function(){
-            var data = {
-                lat: $('.map').data('lat'),
-                lng: $('.map').data('lng'),
-                name: $('#info_dot').val()
-            }
-            console.log(data);
-        });
-        $('#map').on('click', '#deletedot', function(){
-            deleteMarkers();
-        });
     </script>
 @endsection
